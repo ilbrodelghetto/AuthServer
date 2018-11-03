@@ -91,11 +91,13 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 				.claim("authorities", auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.setIssuedAt(new Date(now)).setExpiration(new Date(now + jwtConfig.getExpiration() * 1000)) // in  milliseconds																										 
 				.signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes()).compact();
+
+		String FullToken = "Token: " + jwtConfig.getPrefix() + " " + token;
 		
-		logger.warn("Token: " + jwtConfig.getPrefix() + token);
+		logger.warn(FullToken);
 
 		// Add token to header
-		response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+		response.addHeader(jwtConfig.getHeader(), FullToken);
 	}
 
 	
