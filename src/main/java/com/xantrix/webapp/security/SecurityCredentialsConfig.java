@@ -3,6 +3,7 @@ package com.xantrix.webapp.security;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter
 {
 	@Autowired
+	@Qualifier("customUserDetailsService")
 	private UserDetailsService userDetailsService;
 
 	@Autowired
@@ -60,11 +62,13 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
+	/*
 	@Bean
 	public JwtConfig jwtConfig()
 	{
 		return new JwtConfig();
 	}
+	*/
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder()
