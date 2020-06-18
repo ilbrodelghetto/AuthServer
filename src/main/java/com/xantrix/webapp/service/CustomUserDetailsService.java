@@ -94,7 +94,7 @@ public class CustomUserDetailsService implements UserDetailsService
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(Config.getUserId(), Config.getPassword()));
-
+		
 		Utenti utente = null;
 
 		try 

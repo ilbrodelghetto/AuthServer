@@ -8,20 +8,27 @@ server:
 
 eureka:
   instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60 
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${spring.application.name}-1
+    #registrazione per indirizzo ip (defualt hostname)
     preferIpAddress: true
   client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://AdmUser:MagicaBula_2018@localhost:8761/eureka/
+   registerWithEureka: true
+   fetchRegistry: true
+   serviceUrl:
+     defaultZone: http://eureka-server:8761/eureka/
 
 # ==============================================================
 # = GestUser Properties  
 # ==============================================================
 gestuser:
-  srvUrl: http://localhost:8019/utenti/cerca/userid/
-  userId: ReadUser
-  password: BimBumBam_2018
+  srvUrl: http://gestuser:8019/utenti/cerca/userid/
+  userId: Admin
+  password: nikenike123
 
 # ==============================================================
 # = Sicurezza Properties  

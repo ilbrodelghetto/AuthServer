@@ -6,31 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch)",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "",
-            "args": ""
+            "mainClass": "${file}"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Application<AuthServer>",
+            "name": "Debug (Launch)-DemoApplication<gestuser>",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "com.xantrix.webapp.Application",
-            "args": "",
-            "projectName": "AuthServer"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Attach)",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": "<debug port of remote debuggee>"
+            "mainClass": "it.nike.gestuser.DemoApplication",
+            "projectName": "gestuser"
         }
     ]
 }

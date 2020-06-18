@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -44,7 +45,7 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter
 				.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
 				.authorizeRequests()
 				// allow all POST requests
-				.antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
 				// any other requests must be authenticated
 				.anyRequest().authenticated();
 	}
@@ -56,24 +57,11 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter
 	// user from database.
 	// In addition, we need to define the password encoder also. So, auth
 	// manager can compare and verify passwords.
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception
-	{
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
 
-	/*
-	@Bean
-	public JwtConfig jwtConfig()
-	{
-		return new JwtConfig();
-	}
-	*/
-
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder()
 	{
 		return new BCryptPasswordEncoder();
 	}
-
 }
